@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="t d">
-  <title id="t">Юридическая практика «ЧЕРНОВ × КУЗНЕЦОВ»</title>
-  <desc id="d">Тёмный премиальный юридический кабинет с фирменной эмблемой, книгами, статуей правосудия и городским видом</desc>
-  <defs>
-    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#050a0d" stop-opacity=".42"/>
-      <stop offset=".44" stop-color="#050a0d" stop-opacity=".08"/>
-      <stop offset="1" stop-color="#050a0d" stop-opacity=".02"/>
-    </linearGradient>
-  </defs>
-  <image href="hero-office.webp" x="0" y="0" width="720" height="520" preserveAspectRatio="xMidYMid slice"/>
-  <rect width="720" height="520" fill="url(#shade)"/>
-  <rect x="1" y="1" width="718" height="518" fill="none" stroke="#d6aa67" stroke-opacity=".24"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="t d"><title id="t">Юридическая практика «ЧЕРНОВ × КУЗНЕЦОВ»</title><desc id="d">Тёмный премиальный юридический кабинет с фирменной эмблемой, книгами, статуей правосудия и городским видом</desc><defs><linearGradient id="shade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#050a0d" stop-opacity=".38"/><stop offset=".42" stop-color="#050a0d" stop-opacity=".07"/><stop offset="1" stop-color="#050a0d" stop-opacity="0"/></linearGradient></defs><image href="https://chernov-kuznetsov.ru/hero-office.webp?v=20260913-2244" x="0" y="0" width="720" height="520" preserveAspectRatio="xMidYMid slice"/><rect width="720" height="520" fill="url(#shade)"/><rect x="1" y="1" width="718" height="518" fill="none" stroke="#d6aa67" stroke-opacity=".24"/></svg>
