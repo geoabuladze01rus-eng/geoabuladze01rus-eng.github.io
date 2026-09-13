@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://geoabuladze01rus-eng.github.io/sitemap.xml
+Sitemap: https://chernov-kuznetsov.ru/sitemap.xml
