@@ -10,6 +10,7 @@
   const menuToggle = d.querySelector(".menu-toggle");
   const mainNav = d.querySelector("#main-nav");
   if (menuToggle && mainNav) {
+    top.classList.add("menu-ready");
     const setMenu = (open) => {
       menuToggle.setAttribute("aria-expanded", String(open));
       menuToggle.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
@@ -18,11 +19,20 @@
     menuToggle.addEventListener("click", () => {
       setMenu(menuToggle.getAttribute("aria-expanded") !== "true");
     });
+    d.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+    d.addEventListener("click", (event) => {
+      if (!top.contains(event.target)) setMenu(false);
+    });
     mainNav.addEventListener("click", (event) => {
       if (event.target.closest("a")) setMenu(false);
     });
     w.addEventListener("resize", () => {
-      if (w.innerWidth > 980) setMenu(false);
+      if (w.innerWidth > 1200) setMenu(false);
     });
   }
   const reveals = d.querySelectorAll(".section,.trustbar,.motto,.contacts");
@@ -265,8 +275,10 @@
         days: "Вопрос желательно оценить в ближайшие дни.",
         normal: "Срочного процессуального срока сейчас нет.",
       };
+    const messageLink = builder.querySelector('a[href^="https://wa.me/"]');
     const render = () => {
       preview.textContent = `Здравствуйте. Нужна первичная юридическая оценка по ${topics[topic.value]}. ${urgencies[urgency.value]}\n\nКратко: что произошло — …\nТекущая стадия / орган / суд — …\nБлижайший срок — …\nКакие документы имеются — …`;
+      if (messageLink) messageLink.href = "https://wa.me/79180670360?text=" + encodeURIComponent(preview.textContent);
     };
     topic.addEventListener("change", render);
     urgency.addEventListener("change", render);
@@ -284,6 +296,6 @@
   const here = location.pathname.split("/").pop() || "index.html";
   d.querySelectorAll(".topbar nav a").forEach((a) => {
     const target = (a.getAttribute("href") || "").split("#")[0];
-    if (target === here) a.classList.add("active");
+    if (target === here) { a.classList.add("active"); a.setAttribute("aria-current", "page"); }
   });
 })();

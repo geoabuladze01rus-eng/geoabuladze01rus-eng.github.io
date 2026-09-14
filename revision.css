@@ -1,0 +1,66 @@
+
+/* Shared final layout and accessible navigation. */
+html{scroll-padding-top:110px}
+.brand-copy,.premium-brand{min-width:0}
+body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy{min-width:0}
+body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy b{white-space:normal}
+.hero-actions{flex-wrap:wrap}
+.btn{text-align:center;white-space:normal}
+.section p,.page-hero p{overflow-wrap:break-word}
+.page-hero h1,.hero h1{overflow-wrap:break-word}
+.skip-link{position:fixed;left:16px;top:-100px;z-index:100;padding:12px 20px;background:#edc986;color:#080d10}
+.skip-link:focus{top:12px}
+.menu-toggle{display:none;width:46px;height:46px;padding:12px;border:1px solid #b99055;border-radius:50%;background:#0a1014;color:#edc986;cursor:pointer;flex-shrink:0}
+.menu-toggle span{display:block;height:1px;margin:5px 0;background:currentColor}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+body:is(.home-page,:not(.home-page)) .premium-topbar nav a{min-height:44px;display:flex;align-items:center}
+body:is(.home-page,:not(.home-page)) .home-services-grid small{padding-right:20px}
+body:is(.home-page,:not(.home-page)) .approved-hero h1{font-size:clamp(42px,4.6vw,74px)}
+body:is(.home-page,:not(.home-page)) .approved-hero .hero-copy{width:min(780px,65vw)}
+body:is(.home-page,:not(.home-page)) .approved-hero .lead{max-width:660px}
+.contact-card a{padding-block:7px}
+.reveal{opacity:1;transform:none}
+.qr-box{max-width:100%;height:auto;aspect-ratio:1}
+.qr-box img,.qr-box canvas{max-width:100%;height:auto!important}
+@media(max-width:1200px){
+ body:is(.home-page,:not(.home-page)) .premium-topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 14px;min-height:78px;padding:10px 20px}
+ body:is(.home-page,:not(.home-page)) .premium-brand{min-width:0;gap:10px}
+ body:is(.home-page,:not(.home-page)) .brand-crest{width:48px;height:48px}
+ body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy b{font-size:14px;letter-spacing:.08em}
+ body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy small{font-size:8px;letter-spacing:.16em}
+ body:is(.home-page,:not(.home-page)) .brand-motto{display:none}
+ body:is(.home-page,:not(.home-page)) .menu-toggle{display:block;grid-column:2;grid-row:1}
+ body:is(.home-page,:not(.home-page)) .premium-topbar .top-cta{display:none}
+ body:is(.home-page,:not(.home-page)) .premium-topbar nav{grid-column:1/-1;grid-row:2;display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%;margin:0;padding:8px 0;max-height:calc(100dvh - 100px);overflow:auto}
+ body:is(.home-page,:not(.home-page)) .premium-topbar nav a{width:100%;padding:10px 8px;font-size:16px;white-space:normal}
+ body:is(.home-page,:not(.home-page)) .premium-topbar.menu-ready nav{display:none}
+ body:is(.home-page,:not(.home-page)) .premium-topbar.menu-ready nav.open{display:flex}
+}
+@media(max-width:760px){
+ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+ body:is(.home-page,:not(.home-page)) .premium-topbar{padding:10px 14px}
+ body:is(.home-page,:not(.home-page)) .approved-hero{min-height:0;padding:58px 20px 48px}
+ body:is(.home-page,:not(.home-page)) .approved-hero .hero-copy{width:100%;min-width:0}
+ body:is(.home-page,:not(.home-page)) .approved-hero h1{font-size:clamp(30px,8.6vw,52px);line-height:1.12}
+ body:is(.home-page,:not(.home-page)) .approved-hero h1 br{display:none}
+ body:is(.home-page,:not(.home-page)) .approved-hero .kicker{font-size:10px;letter-spacing:.12em}
+ body:is(.home-page,:not(.home-page)) .approved-hero .kicker::after{display:none}
+ body:is(.home-page,:not(.home-page)) .approved-hero .btn{min-width:0}
+ body:is(.home-page,:not(.home-page)) .trustbar{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body:is(.home-page,:not(.home-page)) .mobile-actions{padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+ .route-actions>*{max-width:100%}
+ .conversion-actions .btn{width:100%}
+ .section-head{margin-bottom:28px}
+}
+@media(max-width:360px){
+ body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy b{font-size:11px}
+ body:is(.home-page,:not(.home-page)) .premium-brand .brand-copy small{font-size:6px}
+ body:is(.home-page,:not(.home-page)) .brand-crest{width:38px;height:38px}
+ body:is(.home-page,:not(.home-page)) .premium-topbar{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation:none!important;transition:none!important}
+}
