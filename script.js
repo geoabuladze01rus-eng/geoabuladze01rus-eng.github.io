@@ -1,1 +1,289 @@
-(()=>{const d=document,w=window;const top=d.querySelector('.topbar');if(top){const sync=()=>top.classList.toggle('scrolled',w.scrollY>18);sync();w.addEventListener('scroll',sync,{passive:true})}const reveals=d.querySelectorAll('.section,.trustbar,.motto,.contacts');if('IntersectionObserver'in w){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.08});reveals.forEach(el=>{el.classList.add('reveal');io.observe(el)})}else reveals.forEach(el=>el.classList.add('visible'));d.querySelectorAll('.faq details').forEach(item=>item.addEventListener('toggle',()=>{if(!item.open)return;d.querySelectorAll('.faq details').forEach(other=>{if(other!==item)other.open=false})}));const route=d.querySelector('[data-route]');if(route){const options=[...route.querySelectorAll('.route-option')],result=route.querySelector('.route-result'),title=result.querySelector('h4'),text=result.querySelector('p'),link=result.querySelector('a'),reset=route.querySelector('.route-reset'),progress=[...route.querySelectorAll('.route-progress span')];const map={criminal:{title:'Уголовная практика',text:'Если вопрос связан с задержанием, обыском, мерой пресечения, арестом или возвратом имущества, начните с уголовного направления.',href:'criminal-law.html',cta:'Перейти к уголовной практике'},svo:{title:'Помощь участникам СВО и семьям',text:'Для выплат, ВВК, МСЭ, инвалидности, пенсий, НИС, земли, пропавших без вести и вопросов семей погибших собран отдельный маршрут.',href:'svo.html',cta:'Перейти в раздел СВО'},business:{title:'Защита и сопровождение бизнеса',text:'Для договоров, претензий, взыскания, корпоративных рисков и кризисных ситуаций начните с бизнес-направления.',href:'business.html',cta:'Перейти к помощи бизнесу'},civil:{title:'Гражданские и семейные споры',text:'Если спор связан с семьёй, имуществом, договором или обязательствами, сначала оценим доказательства, сроки и перспективу.',href:'civil-family.html',cta:'Перейти к гражданским спорам'},urgent:{title:'Нужна быстрая первичная оценка',text:'Если ситуация срочная или вы не уверены в категории, свяжитесь с нами и кратко сообщите факты, стадию и ближайший срок.',href:'contacts.html',cta:'Открыть контакты'}};options.forEach(btn=>btn.addEventListener('click',()=>{options.forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');const x=map[btn.dataset.routeValue];if(!x)return;title.textContent=x.title;text.textContent=x.text;link.href=x.href;link.textContent=x.cta;result.classList.add('visible');progress.forEach((p,i)=>p.classList.toggle('on',i<2));result.scrollIntoView({behavior:'smooth',block:'nearest'})}));reset.addEventListener('click',()=>{options.forEach(x=>x.classList.remove('selected'));result.classList.remove('visible');progress.forEach((p,i)=>p.classList.toggle('on',i===0))})}const urgent=d.querySelector('[data-urgent]');if(urgent){const tabs=[...urgent.querySelectorAll('.urgent-tab')],steps=[...urgent.querySelectorAll('.urgent-panel>div:not(.urgent-footer) p')],warning=urgent.querySelector('.urgent-warning'),link=urgent.querySelector('.urgent-link');const map={detention:{steps:['Уточните, где находится человек, кем и в связи с чем он задержан. Зафиксируйте известное время фактического ограничения свободы.','Не давайте советов подписывать непонятные документы или давать содержательные объяснения без оценки ситуации защитником.','Сохраните контакты очевидцев и документы, сообщения или иные сведения, позволяющие восстановить хронологию.','Как можно быстрее организуйте связь с адвокатом: процессуальный статус и конкретные обстоятельства определяют дальнейшие действия.'],warning:'При задержании время и процессуальный статус имеют значение. Памятка не заменяет защиту по конкретному уголовному делу.',href:'criminal-detention.html',cta:'Подробнее о задержании'},search:{steps:['Попросите предъявить процессуальное основание проведения действия и установите, кто именно его проводит. Не препятствуйте законным действиям физически.','Следите за тем, что фактически обнаруживается, изымается и как это описывается. Существенные замечания добивайтесь внесения в протокол.','Перед подписанием внимательно прочитайте протокол и приложения. Не подтверждайте формулировки, с которыми не согласны; замечания фиксируйте письменно.','Сохраните копии выданных документов и сразу составьте собственную хронологию: время, участники, помещения, предметы и спорные эпизоды.'],warning:'Законность конкретного обыска, выемки или изъятия оценивается по процессуальным документам и фактическим обстоятельствам.',href:'search-seizure.html',cta:'Подробнее об обыске и изъятии'},property:{steps:['Получите и сохраните копию судебного акта или иного процессуального документа, на основании которого ограничено распоряжение имуществом.','Определите, кому принадлежит имущество, как оно приобретено и какое отношение, по версии органа, имеет к уголовному делу.','Соберите документы о праве собственности, источнике приобретения, назначении имущества и последствиях ограничения для собственника.','Проверьте сроки, объём ограничений и доступные процессуальные способы обжалования или изменения меры применительно к вашему статусу.'],warning:'Арест имущества и фактическое изъятие — разные процессуальные ситуации. Маршрут зависит от основания, статуса собственника и содержания судебного акта.',href:'arrest-property.html',cta:'Подробнее об аресте имущества'},svo:{steps:['Определите, какая именно выплата или мера поддержки не предоставлена, и зафиксируйте дату события, с которым связывается право.','Соберите имеющиеся справки, медицинские документы, заключения ВВК/МСЭ, приказы, выписки и ранее полученные ответы — только относящиеся к конкретному основанию.','Установите, какой документ или юридический факт отсутствует либо оспаривается: статус, обстоятельства ранения, причинная связь, включение в списки, реквизиты решения.','После сверки документов определите адресата обращения и порядок обжалования. Не направляйте одинаковые обращения во все органы без понимания компетенции.'],warning:'Размер, основание и порядок выплат зависят от вида выплаты, даты события, статуса военнослужащего и документов. На сайте не обещается автоматическое получение выплаты.',href:'svo-wound-payment.html',cta:'Подробнее о выплатах за ранение'}};const render=key=>{const x=map[key];if(!x)return;tabs.forEach(t=>t.classList.toggle('active',t.dataset.urgentValue===key));steps.forEach((p,i)=>p.textContent=x.steps[i]||'');warning.textContent=x.warning;link.href=x.href;link.textContent=x.cta};tabs.forEach(t=>t.addEventListener('click',()=>render(t.dataset.urgentValue)));render('detention')}const svo=d.querySelector('[data-svo-route]');if(svo){const buttons=[...svo.querySelectorAll('[data-svo-value]')],result=svo.querySelector('.svo-route-result'),title=result.querySelector('h3'),text=result.querySelector('p:not(.svo-docs)'),docs=result.querySelector('.svo-docs'),link=result.querySelector('a');const map={wound:{title:'Ранение, травма или контузия',text:'Сначала устанавливаем вид требуемой выплаты, дату события и документальное основание права.',docs:'На старте полезны: документы о ранении и обстоятельствах его получения, медицинские документы, имеющиеся справки и ответы по выплате.',href:'svo-wound-payment.html'},vvk:{title:'ВВК, МСЭ и причинная связь',text:'Нужно понять, какая именно формулировка или решение оспаривается и какие медицинские документы лежат в его основе.',docs:'На старте полезны: заключение ВВК/МСЭ, выписки, эпикризы, медицинские документы и ранее поданные обращения.',href:'svo-vvk.html'},family:{title:'Права семьи погибшего',text:'Проверяем статус заявителя, документы о гибели и конкретную выплату или гарантию, на которую заявляется право.',docs:'На старте полезны: извещение и документы о гибели, документы о родстве, имеющиеся решения и ответы органов.',href:'svo-family-deceased.html'},missing:{title:'Пропавший без вести или плен',text:'Первое — установить официально зафиксированный статус и какие решения уже приняты по денежному довольствию и правам семьи.',docs:'На старте полезны: извещения, сведения воинской части, обращения и ответы, документы о родстве и ранее назначенных выплатах.',href:'svo-missing-pow.html'},housing:{title:'Жильё, субсидия и НИС',text:'Проверяем основание участия, этап реализации жилищного права и конкретное решение, действие или бездействие, которое создаёт проблему.',docs:'На старте полезны: документы по НИС/субсидии, договоры и кредитные документы при наличии, уведомления и ответы ведомств.',href:'svo-housing-nis.html'},land:{title:'Земельный участок',text:'Право на землю зависит в том числе от регионального регулирования, статуса заявителя и конкретной меры поддержки.',docs:'На старте полезны: документы о статусе, заявление, отказ или ответ органа, сведения о регионе и выбранном виде использования участка.',href:'svo-land.html'}};buttons.forEach(btn=>btn.addEventListener('click',()=>{const x=map[btn.dataset.svoValue];if(!x)return;buttons.forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');title.textContent=x.title;text.textContent=x.text;docs.textContent=x.docs;link.href=x.href;result.classList.add('visible')}))}const builder=d.querySelector('[data-message-builder]');if(builder){const topic=builder.querySelector('[data-builder-topic]'),urgency=builder.querySelector('[data-builder-urgency]'),preview=builder.querySelector('[data-builder-preview]'),copy=builder.querySelector('.builder-copy'),status=builder.querySelector('.builder-status');const topics={criminal:'уголовному делу',svo:'вопросу, связанному с СВО',business:'юридическому вопросу бизнеса',civil:'гражданскому или семейному спору',other:'юридическому вопросу'},urgencies={today:'Вопрос срочный, желательно связаться сегодня.',days:'Вопрос желательно оценить в ближайшие дни.',normal:'Срочного процессуального срока сейчас нет.'};const render=()=>{preview.textContent=`Здравствуйте. Нужна первичная юридическая оценка по ${topics[topic.value]}. ${urgencies[urgency.value]}\n\nКратко: что произошло — …\nТекущая стадия / орган / суд — …\nБлижайший срок — …\nКакие документы имеются — …`};topic.addEventListener('change',render);urgency.addEventListener('change',render);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(preview.textContent);status.textContent='Сообщение скопировано. Можно открыть WhatsApp и вставить его.'}catch(e){status.textContent='Выделите текст выше и скопируйте его вручную.'}});render()}const here=(location.pathname.split('/').pop()||'index.html');d.querySelectorAll('.topbar nav a').forEach(a=>{const target=(a.getAttribute('href')||'').split('#')[0];if(target===here)a.classList.add('active')})})();
+(() => {
+  const d = document,
+    w = window;
+  const top = d.querySelector(".topbar");
+  if (top) {
+    const sync = () => top.classList.toggle("scrolled", w.scrollY > 18);
+    sync();
+    w.addEventListener("scroll", sync, { passive: true });
+  }
+  const menuToggle = d.querySelector(".menu-toggle");
+  const mainNav = d.querySelector("#main-nav");
+  if (menuToggle && mainNav) {
+    const setMenu = (open) => {
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+      mainNav.classList.toggle("open", open);
+    };
+    menuToggle.addEventListener("click", () => {
+      setMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setMenu(false);
+    });
+    w.addEventListener("resize", () => {
+      if (w.innerWidth > 980) setMenu(false);
+    });
+  }
+  const reveals = d.querySelectorAll(".section,.trustbar,.motto,.contacts");
+  if ("IntersectionObserver" in w) {
+    const io = new IntersectionObserver(
+      (es) =>
+        es.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.08 },
+    );
+    reveals.forEach((el) => {
+      el.classList.add("reveal");
+      io.observe(el);
+    });
+  } else reveals.forEach((el) => el.classList.add("visible"));
+  d.querySelectorAll(".faq details").forEach((item) =>
+    item.addEventListener("toggle", () => {
+      if (!item.open) return;
+      d.querySelectorAll(".faq details").forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    }),
+  );
+  const route = d.querySelector("[data-route]");
+  if (route) {
+    const options = [...route.querySelectorAll(".route-option")],
+      result = route.querySelector(".route-result"),
+      title = result.querySelector("h4"),
+      text = result.querySelector("p"),
+      link = result.querySelector("a"),
+      reset = route.querySelector(".route-reset"),
+      progress = [...route.querySelectorAll(".route-progress span")];
+    const map = {
+      criminal: {
+        title: "Уголовная практика",
+        text: "Если вопрос связан с задержанием, обыском, мерой пресечения, арестом или возвратом имущества, начните с уголовного направления.",
+        href: "criminal-law.html",
+        cta: "Перейти к уголовной практике",
+      },
+      svo: {
+        title: "Помощь участникам СВО и семьям",
+        text: "Для выплат, ВВК, МСЭ, инвалидности, пенсий, НИС, земли, пропавших без вести и вопросов семей погибших собран отдельный маршрут.",
+        href: "svo.html",
+        cta: "Перейти в раздел СВО",
+      },
+      business: {
+        title: "Защита и сопровождение бизнеса",
+        text: "Для договоров, претензий, взыскания, корпоративных рисков и кризисных ситуаций начните с бизнес-направления.",
+        href: "business.html",
+        cta: "Перейти к помощи бизнесу",
+      },
+      civil: {
+        title: "Гражданские и семейные споры",
+        text: "Если спор связан с семьёй, имуществом, договором или обязательствами, сначала оценим доказательства, сроки и перспективу.",
+        href: "civil-family.html",
+        cta: "Перейти к гражданским спорам",
+      },
+      urgent: {
+        title: "Нужна быстрая первичная оценка",
+        text: "Если ситуация срочная или вы не уверены в категории, свяжитесь с нами и кратко сообщите факты, стадию и ближайший срок.",
+        href: "contacts.html",
+        cta: "Открыть контакты",
+      },
+    };
+    options.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        options.forEach((x) => x.classList.remove("selected"));
+        btn.classList.add("selected");
+        const x = map[btn.dataset.routeValue];
+        if (!x) return;
+        title.textContent = x.title;
+        text.textContent = x.text;
+        link.href = x.href;
+        link.textContent = x.cta;
+        result.classList.add("visible");
+        progress.forEach((p, i) => p.classList.toggle("on", i < 2));
+        result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }),
+    );
+    reset.addEventListener("click", () => {
+      options.forEach((x) => x.classList.remove("selected"));
+      result.classList.remove("visible");
+      progress.forEach((p, i) => p.classList.toggle("on", i === 0));
+    });
+  }
+  const urgent = d.querySelector("[data-urgent]");
+  if (urgent) {
+    const tabs = [...urgent.querySelectorAll(".urgent-tab")],
+      steps = [
+        ...urgent.querySelectorAll(".urgent-panel>div:not(.urgent-footer) p"),
+      ],
+      warning = urgent.querySelector(".urgent-warning"),
+      link = urgent.querySelector(".urgent-link");
+    const map = {
+      detention: {
+        steps: [
+          "Уточните, где находится человек, кем и в связи с чем он задержан. Зафиксируйте известное время фактического ограничения свободы.",
+          "Не давайте советов подписывать непонятные документы или давать содержательные объяснения без оценки ситуации защитником.",
+          "Сохраните контакты очевидцев и документы, сообщения или иные сведения, позволяющие восстановить хронологию.",
+          "Как можно быстрее организуйте связь с адвокатом: процессуальный статус и конкретные обстоятельства определяют дальнейшие действия.",
+        ],
+        warning:
+          "При задержании время и процессуальный статус имеют значение. Памятка не заменяет защиту по конкретному уголовному делу.",
+        href: "criminal-detention.html",
+        cta: "Подробнее о задержании",
+      },
+      search: {
+        steps: [
+          "Попросите предъявить процессуальное основание проведения действия и установите, кто именно его проводит. Не препятствуйте законным действиям физически.",
+          "Следите за тем, что фактически обнаруживается, изымается и как это описывается. Существенные замечания добивайтесь внесения в протокол.",
+          "Перед подписанием внимательно прочитайте протокол и приложения. Не подтверждайте формулировки, с которыми не согласны; замечания фиксируйте письменно.",
+          "Сохраните копии выданных документов и сразу составьте собственную хронологию: время, участники, помещения, предметы и спорные эпизоды.",
+        ],
+        warning:
+          "Законность конкретного обыска, выемки или изъятия оценивается по процессуальным документам и фактическим обстоятельствам.",
+        href: "search-seizure.html",
+        cta: "Подробнее об обыске и изъятии",
+      },
+      property: {
+        steps: [
+          "Получите и сохраните копию судебного акта или иного процессуального документа, на основании которого ограничено распоряжение имуществом.",
+          "Определите, кому принадлежит имущество, как оно приобретено и какое отношение, по версии органа, имеет к уголовному делу.",
+          "Соберите документы о праве собственности, источнике приобретения, назначении имущества и последствиях ограничения для собственника.",
+          "Проверьте сроки, объём ограничений и доступные процессуальные способы обжалования или изменения меры применительно к вашему статусу.",
+        ],
+        warning:
+          "Арест имущества и фактическое изъятие — разные процессуальные ситуации. Маршрут зависит от основания, статуса собственника и содержания судебного акта.",
+        href: "arrest-property.html",
+        cta: "Подробнее об аресте имущества",
+      },
+      svo: {
+        steps: [
+          "Определите, какая именно выплата или мера поддержки не предоставлена, и зафиксируйте дату события, с которым связывается право.",
+          "Соберите имеющиеся справки, медицинские документы, заключения ВВК/МСЭ, приказы, выписки и ранее полученные ответы — только относящиеся к конкретному основанию.",
+          "Установите, какой документ или юридический факт отсутствует либо оспаривается: статус, обстоятельства ранения, причинная связь, включение в списки, реквизиты решения.",
+          "После сверки документов определите адресата обращения и порядок обжалования. Не направляйте одинаковые обращения во все органы без понимания компетенции.",
+        ],
+        warning:
+          "Размер, основание и порядок выплат зависят от вида выплаты, даты события, статуса военнослужащего и документов. На сайте не обещается автоматическое получение выплаты.",
+        href: "svo-wound-payment.html",
+        cta: "Подробнее о выплатах за ранение",
+      },
+    };
+    const render = (key) => {
+      const x = map[key];
+      if (!x) return;
+      tabs.forEach((t) =>
+        t.classList.toggle("active", t.dataset.urgentValue === key),
+      );
+      steps.forEach((p, i) => (p.textContent = x.steps[i] || ""));
+      warning.textContent = x.warning;
+      link.href = x.href;
+      link.textContent = x.cta;
+    };
+    tabs.forEach((t) =>
+      t.addEventListener("click", () => render(t.dataset.urgentValue)),
+    );
+    render("detention");
+  }
+  const svo = d.querySelector("[data-svo-route]");
+  if (svo) {
+    const buttons = [...svo.querySelectorAll("[data-svo-value]")],
+      result = svo.querySelector(".svo-route-result"),
+      title = result.querySelector("h3"),
+      text = result.querySelector("p:not(.svo-docs)"),
+      docs = result.querySelector(".svo-docs"),
+      link = result.querySelector("a");
+    const map = {
+      wound: {
+        title: "Ранение, травма или контузия",
+        text: "Сначала устанавливаем вид требуемой выплаты, дату события и документальное основание права.",
+        docs: "На старте полезны: документы о ранении и обстоятельствах его получения, медицинские документы, имеющиеся справки и ответы по выплате.",
+        href: "svo-wound-payment.html",
+      },
+      vvk: {
+        title: "ВВК, МСЭ и причинная связь",
+        text: "Нужно понять, какая именно формулировка или решение оспаривается и какие медицинские документы лежат в его основе.",
+        docs: "На старте полезны: заключение ВВК/МСЭ, выписки, эпикризы, медицинские документы и ранее поданные обращения.",
+        href: "svo-vvk.html",
+      },
+      family: {
+        title: "Права семьи погибшего",
+        text: "Проверяем статус заявителя, документы о гибели и конкретную выплату или гарантию, на которую заявляется право.",
+        docs: "На старте полезны: извещение и документы о гибели, документы о родстве, имеющиеся решения и ответы органов.",
+        href: "svo-family-deceased.html",
+      },
+      missing: {
+        title: "Пропавший без вести или плен",
+        text: "Первое — установить официально зафиксированный статус и какие решения уже приняты по денежному довольствию и правам семьи.",
+        docs: "На старте полезны: извещения, сведения воинской части, обращения и ответы, документы о родстве и ранее назначенных выплатах.",
+        href: "svo-missing-pow.html",
+      },
+      housing: {
+        title: "Жильё, субсидия и НИС",
+        text: "Проверяем основание участия, этап реализации жилищного права и конкретное решение, действие или бездействие, которое создаёт проблему.",
+        docs: "На старте полезны: документы по НИС/субсидии, договоры и кредитные документы при наличии, уведомления и ответы ведомств.",
+        href: "svo-housing-nis.html",
+      },
+      land: {
+        title: "Земельный участок",
+        text: "Право на землю зависит в том числе от регионального регулирования, статуса заявителя и конкретной меры поддержки.",
+        docs: "На старте полезны: документы о статусе, заявление, отказ или ответ органа, сведения о регионе и выбранном виде использования участка.",
+        href: "svo-land.html",
+      },
+    };
+    buttons.forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const x = map[btn.dataset.svoValue];
+        if (!x) return;
+        buttons.forEach((b) => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        title.textContent = x.title;
+        text.textContent = x.text;
+        docs.textContent = x.docs;
+        link.href = x.href;
+        result.classList.add("visible");
+      }),
+    );
+  }
+  const builder = d.querySelector("[data-message-builder]");
+  if (builder) {
+    const topic = builder.querySelector("[data-builder-topic]"),
+      urgency = builder.querySelector("[data-builder-urgency]"),
+      preview = builder.querySelector("[data-builder-preview]"),
+      copy = builder.querySelector(".builder-copy"),
+      status = builder.querySelector(".builder-status");
+    const topics = {
+        criminal: "уголовному делу",
+        svo: "вопросу, связанному с СВО",
+        business: "юридическому вопросу бизнеса",
+        civil: "гражданскому или семейному спору",
+        other: "юридическому вопросу",
+      },
+      urgencies = {
+        today: "Вопрос срочный, желательно связаться сегодня.",
+        days: "Вопрос желательно оценить в ближайшие дни.",
+        normal: "Срочного процессуального срока сейчас нет.",
+      };
+    const render = () => {
+      preview.textContent = `Здравствуйте. Нужна первичная юридическая оценка по ${topics[topic.value]}. ${urgencies[urgency.value]}\n\nКратко: что произошло — …\nТекущая стадия / орган / суд — …\nБлижайший срок — …\nКакие документы имеются — …`;
+    };
+    topic.addEventListener("change", render);
+    urgency.addEventListener("change", render);
+    copy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(preview.textContent);
+        status.textContent =
+          "Сообщение скопировано. Можно открыть WhatsApp и вставить его.";
+      } catch (e) {
+        status.textContent = "Выделите текст выше и скопируйте его вручную.";
+      }
+    });
+    render();
+  }
+  const here = location.pathname.split("/").pop() || "index.html";
+  d.querySelectorAll(".topbar nav a").forEach((a) => {
+    const target = (a.getAttribute("href") || "").split("#")[0];
+    if (target === here) a.classList.add("active");
+  });
+})();
